@@ -6,8 +6,6 @@ const express = require('express')
 const helmet = require('helmet')
 const server = require('http')
 
-
-
 // Core
 const routes = require('./controllers/route.js')
 
@@ -40,6 +38,7 @@ module.exports = class Server {
 
         // new routes.auth.linkedin(this.app)
         new routes.auth.google(this.app)
+        new routes.auth.github(this.app)
 
         // If route not exist
         this.app.use((req, res) => {
@@ -66,7 +65,7 @@ module.exports = class Server {
         this.middleware()
         this.routes()
         this.server.listen(3000)
-        console.log('connected port 4000')
+        console.log('connected port 3000')
     } catch (e) {
         console.error(`[ERROR] Server -> ${e}`)
     }
