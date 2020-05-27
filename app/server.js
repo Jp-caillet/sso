@@ -39,6 +39,7 @@ module.exports = class Server {
     routes() {
 
         // new routes.auth.linkedin(this.app)
+        new routes.auth.google(this.app)
 
         // If route not exist
         this.app.use((req, res) => {
@@ -64,7 +65,7 @@ module.exports = class Server {
         this.security()
         this.middleware()
         this.routes()
-        this.server.listen(4000)
+        this.server.listen(3000)
         console.log('connected port 4000')
     } catch (e) {
         console.error(`[ERROR] Server -> ${e}`)
