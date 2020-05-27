@@ -5,7 +5,7 @@ const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
 const server = require('http')
-
+const fs = require('fs')
 
 
 // Core
@@ -27,6 +27,8 @@ module.exports = class Server {
     middleware() {
         this.app.use(compression())
         this.app.use(cors())
+        console.log(__dirname)
+        this.app.use(express.static(__dirname + '/public'))
         this.app.use(bodyParser.urlencoded({
             'extended': true
         }))
@@ -39,6 +41,9 @@ module.exports = class Server {
     routes() {
 
         // new routes.auth.linkedin(this.app)
+        this.app.get('/', function(req, res) {
+        res.sendFile(__dirname + '/public/templates/index.html')
+        })
         new routes.auth.google(this.app)
         new routes.auth.facebook(this.app)
         new routes.auth.github(this.app)
@@ -68,7 +73,7 @@ module.exports = class Server {
         this.middleware()
         this.routes()
         this.server.listen(3000)
-        console.log('connected port 4000')
+        console.log('connected port 3000')
     } catch (e) {
         console.error(`[ERROR] Server -> ${e}`)
     }
