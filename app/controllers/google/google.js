@@ -2,27 +2,17 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
-passport.use(new GoogleStrategy({
-    clientID: "656892878336-0ie79puot0gp7l734mk7nd3llb1ml66l.apps.googleusercontent.com",
-    clientSecret: "uxPUb5N1x5cskVc2dtgUOYoM",
+module.exports =  passport.use(new GoogleStrategy({
+    clientID: "136910366106-hbfnljg86u7ihskhuledh73b5enb61c4.apps.googleusercontent.com",
+    clientSecret: "MLMHVOZD5QDakjHl0SVBsg1u",
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   // google sends back the tokens and progile info
   function(token, tokenSecret, profile, done) {
 
-    var searchQuery = {
-      name: profile.displayName
-    };
-
-    var updates = {
-      name: profile.displayName,
-      someID: profile.id
-    };
-
-    var options = {
-      upsert: true
-    };
-    console.log(profile)
+  	console.log(token)
+  	console.log(tokenSecret)
+     done(null, profile)
   }
 
 ))
@@ -31,4 +21,3 @@ passport.use(new GoogleStrategy({
 
 
 
-module.exports = passport;
