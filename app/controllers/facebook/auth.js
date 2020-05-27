@@ -1,6 +1,6 @@
 // AuthController.js
 const validator = require('node-validator')
-var passportGoogle= require('./google.js')
+var passportFacebook= require('./facebook.js')
 
 module.exports = class Authentification {
   constructor (app) {
@@ -13,16 +13,18 @@ module.exports = class Authentification {
    * Middleware
    */
    middleware () {
-    this.app.get('/auth/google',
-  passportGoogle.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    this.app.get('/auth/facebook',
+  passportFacebook.authenticate('facebook', { scope : 'email' }));
 
-this.app.get('/auth/google/callback',   passportGoogle.authenticate('google'), // complete the authenticate using the google strategy
+this.app.get('/auth/facebook/callback',   passportFacebook.authenticate('google'), // complete the authenticate using the google strategy
   (err, req, res, next) => { // custom error handler to catch any errors, such as TokenError
-    
-    if (err.name === 'TokenError') {
 
-     res.redirect('/'); // redirect them back to the login page
+    if (err.name === 'TokenError') {
+ 
+
+     res.status(200).json(req.user) // redirect them back to the login page
     } else {
+
     res.status(200).json(req.user)
     
     }

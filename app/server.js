@@ -40,6 +40,8 @@ module.exports = class Server {
 
         // new routes.auth.linkedin(this.app)
         new routes.auth.google(this.app)
+        new routes.auth.facebook(this.app)
+        new routes.auth.github(this.app)
 
         // If route not exist
         this.app.use((req, res) => {
