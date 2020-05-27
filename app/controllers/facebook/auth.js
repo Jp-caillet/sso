@@ -14,13 +14,11 @@ module.exports = class Authentification {
    */
    middleware () {
     this.app.get('/auth/facebook',
-  passportFacebook.authenticate('facebook', { scope : 'email' }));
+  passportFacebook.authenticate('facebook'));
 
-this.app.get('/auth/facebook/callback',   passportFacebook.authenticate('google'), // complete the authenticate using the google strategy
+this.app.get('/auth/facebook/callback',   passportFacebook.authenticate('facebook'), // complete the authenticate using the google strategy
   (err, req, res, next) => { // custom error handler to catch any errors, such as TokenError
-
     if (err.name === 'TokenError') {
- 
 
      res.status(200).json(req.user) // redirect them back to the login page
     } else {
@@ -28,9 +26,6 @@ this.app.get('/auth/facebook/callback',   passportFacebook.authenticate('google'
     res.status(200).json(req.user)
     
     }
-  },
-  (req, res) => { // On success, redirect back to '/'
-    
   })
   }
 

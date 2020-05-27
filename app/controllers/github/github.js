@@ -10,19 +10,7 @@ passport.use(new GitHubStrategy({
   // github sends back the tokens and profile info
   function(accessToken, refreshToken, profile, done) {
 
-    var searchQuery = {
-      name: profile.displayName
-    };
-
-    var updates = {
-      name: profile.displayName,
-      someID: profile.id
-    };
-
-    var options = {
-      upsert: true
-    };
-    console.log(profile)
+   done(null, profile)
   }
 
 ))

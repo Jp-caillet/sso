@@ -17,9 +17,17 @@ module.exports = class Authentification {
   passportGithub.authenticate('github'));
 
 this.app.get('/auth/github/callback', passportGithub.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication
+  (err, req, res, next) => { // custom error handler to catch any errors, such as TokenError
+    console.log("req.user")
+    if (err.name === 'TokenError') {
+    console.log("tutu")
+
+     res.status(200).json(req.user) // redirect them back to the login page
+    } else {
+
     res.status(200).json(req.user)
+    
+    }
   })
   }
 
