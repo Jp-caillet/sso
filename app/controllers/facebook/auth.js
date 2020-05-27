@@ -23,7 +23,7 @@ this.app.get('/auth/facebook/callback',   passportFacebook.authenticate('faceboo
      res.status(200).json(req.user) // redirect them back to the login page
     } else {
 
-    res.status(200).json(req.user)
+    res.redirect(`/profile?name=${req.user._json.name}&con=facebook`)
     
     }
   })

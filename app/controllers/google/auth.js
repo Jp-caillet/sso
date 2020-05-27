@@ -23,7 +23,7 @@ this.app.get('/auth/google/callback',   passportGoogle.authenticate('google'), /
 
      res.redirect('/'); // redirect them back to the login page
     } else {
-    res.status(200).json(req.user)
+    res.redirect(`/profile?name=${req.user.displayName}&con=google`)
     
     }
   },

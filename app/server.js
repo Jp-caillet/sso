@@ -6,6 +6,7 @@ const express = require('express')
 const helmet = require('helmet')
 const server = require('http')
 const fs = require('fs')
+const path = require('path')
 
 
 // Core
@@ -27,7 +28,6 @@ module.exports = class Server {
     middleware() {
         this.app.use(compression())
         this.app.use(cors())
-        console.log(__dirname)
         this.app.use(express.static(__dirname + '/public'))
         this.app.use(bodyParser.urlencoded({
             'extended': true
@@ -41,9 +41,10 @@ module.exports = class Server {
     routes() {
 
         // new routes.auth.linkedin(this.app)
-        this.app.get('/', function(req, res) {
-        res.sendFile(__dirname + '/public/templates/index.html')
-        })
+        this.app.get('/profile', function(req, res, next) {
+  res.sendFile(path.join(__dirname, "./public", "profile.html"), {dotfiles: "allow"});
+});
+
         new routes.auth.google(this.app)
         new routes.auth.facebook(this.app)
         new routes.auth.github(this.app)

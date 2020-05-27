@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="profile.css">
+</head>
+<body>
+
+<div class="container-fluid main">
+  <div class="card profile">
+    <div class="card-header profileName" id="name">
+      name
+      
+      <div class="isOnline">
+        <small>Online</small>
+      </div>
+    </div>
+    <div class="card-body profileBody">
+      <div class="profilePic">
+        <img class="avatar" src="https://avatars1.githubusercontent.com/u/8537504?s=400&amp;v=4" alt="Username">
+      </div>
+      <div class="profileInfo" id="source">
+        <p>connected from: toto</p>
+      </div>
+    </div>
+    <div class="card-footer actions">
+      <div class="actionFirst">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	var url_string =window.location.href;
+	var url = new URL(url_string);
+	var c = url.searchParams.get("name");
+	console.log(c);
+  	var str = document.getElementById("name").innerHTML; 
+  	var res = str.replace("name", c);
+  	document.getElementById("name").innerHTML = res;
+
+
+
+	var v = url.searchParams.get("con");
+	console.log(v);
+  	var str = document.getElementById("source").innerHTML; 
+  	var res = str.replace("toto", v);
+  	document.getElementById("source").innerHTML = res;
+	 //window.location.href
+	
+
+</script>
+</body>
+</html> 
