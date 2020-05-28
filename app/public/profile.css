@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   overflow: auto;
-  background: #fbfbfb;
+  background: #87788c;
 }
 .profile {
   background-image: url("http://starkovtattoo.spb.ru/images/200/DSC100224440.png");
@@ -87,4 +87,9 @@
   transform: scale(1);
   fill:#fff;
   
+}
+
+.logout{
+	margin-left: 55px;
+	margin-top:  80px
 }
