@@ -4,7 +4,7 @@ const compression = require('compression')
 const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
-const server = require('http')
+const server = require('https')
 const fs = require('fs')
 const path = require('path')
 
@@ -18,7 +18,10 @@ const routes = require('./controllers/route.js')
 module.exports = class Server {
     constructor() {
         this.app = express()
-        this.server = server.createServer(this.app)
+        this.server = server.createServer({
+            key: fs.readFileSync(__dirname +"/localhost.key"),
+            cert: fs.readFileSync(__dirname +"/localhost.cert")
+        }, this.app)
         this.run()
     }
 
